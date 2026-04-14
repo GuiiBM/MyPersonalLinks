@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meus Links</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: #080808;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 5rem 1.5rem 6rem;
+    }
+
+    header { text-align: center; margin-bottom: 4rem; }
+
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #3b82f6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -.03em;
+    }
+
+    header p { margin-top: .6rem; color: #444; font-size: .95rem; }
+
+    .grid {
+      width: 100%;
+      max-width: 900px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 1.75rem 1.5rem 1.5rem;
+      background: #101010;
+      border: 1px solid #1c1c1c;
+      border-radius: 22px;
+      text-decoration: none;
+      color: #f0f0f0;
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+    }
+
+    /* brilho de cor no topo do card */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: var(--glow, #a855f7);
+      opacity: .07;
+      filter: blur(40px);
+      transition: opacity .3s;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: color-mix(in srgb, var(--glow, #a855f7) 40%, transparent);
+      box-shadow: 0 20px 60px color-mix(in srgb, var(--glow, #a855f7) 15%, transparent);
+    }
+
+    .card:hover::before { opacity: .18; }
+
+    .icon {
+      font-size: 2rem;
+      width: 3.5rem;
+      height: 3.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: color-mix(in srgb, var(--glow, #a855f7) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--glow, #a855f7) 20%, transparent);
+      border-radius: 14px;
+      margin-bottom: 1.25rem;
+    }
+
+    .tag {
+      align-self: flex-start;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--glow, #a855f7);
+      background: color-mix(in srgb, var(--glow, #a855f7) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--glow, #a855f7) 20%, transparent);
+      border-radius: 6px;
+      padding: .2rem .6rem;
+      margin-bottom: .6rem;
+    }
+
+    .label {
+      font-weight: 800;
+      font-size: 1.1rem;
+      line-height: 1.2;
+      margin-bottom: .4rem;
+    }
+
+    .description {
+      font-size: .82rem;
+      color: #484848;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1.4rem;
+      padding-top: 1rem;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .url-text {
+      font-size: .72rem;
+      color: #333;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 75%;
+    }
+
+    .arrow {
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #161616;
+      border: 1px solid #222;
+      border-radius: 8px;
+      font-size: .9rem;
+      color: #333;
+      flex-shrink: 0;
+      transition: background .3s, color .3s, border-color .3s, transform .3s;
+    }
+
+    .card:hover .arrow {
+      background: color-mix(in srgb, var(--glow, #a855f7) 15%, transparent);
+      border-color: color-mix(in srgb, var(--glow, #a855f7) 35%, transparent);
+      color: var(--glow, #a855f7);
+      transform: translate(2px, -2px);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Meus Links</h1>
+    <p>Todos os meus projetos em um só lugar</p>
+  </header>
+
+  <div class="grid" id="app"></div>
+
+  <script>
+    fetch("links.json")
+      .then(r => r.json())
+      .then(links => {
+        document.getElementById("app").innerHTML = links.map(({ icon, label, description, tag, url, color }) => `
+          <a class="card" href="${url}" target="_blank" rel="noopener" style="--glow:${color || '#a855f7'}">
+            <span class="icon">${icon}</span>
+            ${tag ? `<span class="tag">${tag}</span>` : ""}
+            <span class="label">${label}</span>
+            ${description ? `<span class="description">${description}</span>` : ""}
+            <span class="footer">
+              <span class="url-text">${url.replace(/^https?:\/\//, '')}</span>
+              <span class="arrow">↗</span>
+            </span>
+          </a>
+        `).join("");
+      });
+  </script>
+</body>
+</html>

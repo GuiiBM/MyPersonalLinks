@@ -1,0 +1,26 @@
+[
+  {
+    "icon": "🚀",
+    "label": "GBM Marketing",
+    "description": "Site de marketing digital",
+    "tag": "Marketing",
+    "color": "#a855f7",
+    "url": "https://gbm-mkt.netlify.app"
+  },
+  {
+    "icon": "💡",
+    "label": "Projeto 2",
+    "description": "Descrição curta do projeto",
+    "tag": "Web",
+    "color": "#3b82f6",
+    "url": "https://exemplo2.netlify.app"
+  },
+  {
+    "icon": "🌐",
+    "label": "Projeto 3",
+    "description": "Descrição curta do projeto",
+    "tag": "App",
+    "color": "#10b981",
+    "url": "https://exemplo3.netlify.app"
+  }
+]

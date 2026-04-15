@@ -2,25 +2,97 @@
   {
     "icon": "🚀",
     "label": "GBM Marketing",
-    "description": "Site de marketing digital",
-    "tag": "Marketing",
+    "description": "Meu Portfólio Particular",
+    "tag": "Pessoal",
     "color": "#a855f7",
     "url": "https://gbm-mkt.netlify.app"
   },
   {
-    "icon": "💡",
-    "label": "Projeto 2",
-    "description": "Descrição curta do projeto",
-    "tag": "Web",
-    "color": "#3b82f6",
-    "url": "https://exemplo2.netlify.app"
+    "icon": "📅",
+    "label": "Estigmas",
+    "description": "Calendário com sugestões de autoaprimoramento",
+    "tag": "Calendar",
+    "color": "#ff0000",
+    "url": "https://estigmas.netlify.app"
   },
   {
     "icon": "🌐",
-    "label": "Projeto 3",
-    "description": "Descrição curta do projeto",
-    "tag": "App",
-    "color": "#10b981",
-    "url": "https://exemplo3.netlify.app"
+    "label": "TWB Website",
+    "description": "Website voltado para exposição da empresa Teacher WIllians Batistela",
+    "tag": "Website",
+    "color": "#1020ff",
+    "url": "https://.netlify.app"
+  },
+  {
+    "icon": "✝",
+    "label": "Planilha Ágape",
+    "description": "Formulário Simplificado da Igreja Apostólica Ágape com acesso ao Banco de Dados",
+    "tag": "Web Data Base",
+    "color": "#104199",
+    "url": "https://integracaoagape.netlify.app"
+  },
+  {
+    "icon": "🤡",
+    "label": "Non-Sense Maker 'Não'",
+    "description": "Um gerador automático de frases que compõe e dizem 'Não'",
+    "tag": "Entertainment",
+    "color": ["#ff0214", "#f45167"],
+    "url": "https://negativeanswer.netlify.app/share"
+  },
+  {
+    "icon": "🔄",
+    "label": "Conversor",
+    "description": "Website voltado para conversões de medidas brasileiras e americanas",
+    "tag": "Entertainment",
+    "color": "#ff22ff",
+    "url": "https://conversoes.netlify.app"
+  },
+  {
+    "icon": "💰",
+    "label": "Reginaldo Gouvea Junior",
+    "description": "Website voltado para exposição da empresa Junior Gouvea",
+    "tag": "Website",
+    "color": "#ffff00",
+    "url": "https://juniorgouvea.framer.website"
+  },
+  {
+    "icon": "🎈",
+    "label": "Mundo Ágape",
+    "description": "Website voltado para exposição das fotos do ministério Mundo Ágape",
+    "tag": "Web Data Base",
+    "color": "#ff0097",
+    "url": "https://mundoagape.netlify.app"
+  },
+  {
+    "icon": "🏗",
+    "label": "Loc Andaimes Website",
+    "description": "Website voltado para exposição da empresa Loc Andaimes",
+    "tag": "Website",
+    "color": "#ff8800",
+    "url": "https://locandaimes.framer.website"
+  },
+  {
+    "icon": "👽",
+    "label": "O Hack",
+    "description": "Site para entretenimento e geração de caracteres aleatórios",
+    "tag": "Entertainment",
+    "color": "#39ff14",
+    "url": "https://ohack.netlify.app"
+  },
+  {
+    "icon": "📷",
+    "label": "Relicário",
+    "description": "Website voltado para exposição da empresa Relicário P2",
+    "tag": "Website",
+    "color": "#fff",
+    "url": "https://relicario.framer.website"
+  },
+  {
+    "icon": "🪪",
+    "label": "GoMei",
+    "description": "Website voltado para exposição da empresa Gomei",
+    "tag": "Website",
+    "color": "#FF5500",
+    "url": "https://gomei.framer.website"
   }
 ]

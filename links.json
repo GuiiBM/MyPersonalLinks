@@ -64,6 +64,14 @@
     "url": "https://mundoagape.netlify.app"
   },
   {
+    "icon": "🎫",
+    "label": "Calcular Passagens",
+    "description": "Website voltado para cálculo de passagens de Ubatuba-São Sebastião",
+    "tag": "Pessoal",
+    "color": "#00aa97",
+    "url": "  https://calcularpassagens.netlify.app/"
+  },
+  {
     "icon": "🏗",
     "label": "Loc Andaimes Website",
     "description": "Website voltado para exposição da empresa Loc Andaimes",

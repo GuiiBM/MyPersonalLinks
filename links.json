@@ -16,14 +16,6 @@
     "url": "https://estigmas.netlify.app"
   },
   {
-    "icon": "🌐",
-    "label": "TWB Website",
-    "description": "Website voltado para exposição da empresa Teacher WIllians Batistela",
-    "tag": "Website",
-    "color": "#1020ff",
-    "url": "https://.netlify.app"
-  },
-  {
     "icon": "✝",
     "label": "Planilha Ágape",
     "description": "Formulário Simplificado da Igreja Apostólica Ágape com acesso ao Banco de Dados",
@@ -54,6 +46,14 @@
     "tag": "Website",
     "color": "#ffff00",
     "url": "https://juniorgouvea.framer.website"
+  },
+  {
+    "icon": "🌐",
+    "label": "TWB Website",
+    "description": "Website voltado para exposição da empresa Teacher WIllians Batistela",
+    "tag": "Website",
+    "color": "#1020ff",
+    "url": "https://twbteacherwillians.netlify.app/"
   },
   {
     "icon": "🎈",

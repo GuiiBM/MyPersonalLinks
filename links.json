@@ -1,14 +1,14 @@
 [
   {
-    "icon": "🚀",
+    "icon": "megaphone",
     "label": "GBM Marketing",
     "description": "Meu Portfólio Particular",
     "tag": "Pessoal",
     "color": "#a855f7",
-    "url": "https://gbm-mkt.netlify.app"
+    "url": "https://gbm-mkt.netlify.app/"
   },
   {
-    "icon": "🎧",
+    "icon": "wave",
     "label": "Ressonance",
     "description": "Meu TCC",
     "tag": "Pessoal",
@@ -16,47 +16,55 @@
     "url": "https://ressonance.hyperphp.com/"
   },
   {
-    "icon": "📅",
-    "label": "Estigmas",
-    "description": "Calendário com sugestões de autoaprimoramento",
-    "tag": "Calendar",
-    "color": "#ff0000",
-    "url": "https://estigmas.netlify.app"
+    "icon": "face",
+    "label": "Cara a Cara",
+    "description": "Jogo Cara a Cara Online",
+    "tag": "Entertainment",
+    "color": "#b18b33",
+    "url": "https://jogarcaraacara.netlify.app/"
   },
   {
-    "icon": "✝",
+    "icon": "calendar",
+    "label": "Estigmas",
+    "description": "Calendário com sugestões de autoaprimoramento",
+    "tag": "Entertainment",
+    "color": "#ff0000",
+    "url": "https://estigmas.netlify.app/"
+  },
+  {
+    "icon": "sheet",
     "label": "Planilha Ágape",
     "description": "Formulário Simplificado da Igreja Apostólica Ágape com acesso ao Banco de Dados",
     "tag": "Web Data Base",
     "color": "#104199",
-    "url": "https://integracaoagape.netlify.app"
+    "url": "https://integracaoagape.netlify.app/"
   },
   {
-    "icon": "🤡",
+    "icon": "no",
     "label": "Non-Sense Maker 'Não'",
     "description": "Um gerador automático de frases que compõe e dizem 'Não'",
     "tag": "Entertainment",
     "color": ["#ff0214", "#f45167"],
-    "url": "https://negativeanswer.netlify.app/share"
+    "url": "https://negativeanswer.netlify.app/"
   },
   {
-    "icon": "🔄",
+    "icon": "swap",
     "label": "Conversor",
     "description": "Website voltado para conversões de medidas brasileiras e americanas",
     "tag": "Entertainment",
     "color": "#ff22ff",
-    "url": "https://conversoes.netlify.app"
+    "url": "https://conversoes.netlify.app/"
   },
   {
-    "icon": "💰",
+    "icon": "coin",
     "label": "Reginaldo Gouvea Junior",
     "description": "Website voltado para exposição da empresa Junior Gouvea",
     "tag": "Website",
     "color": "#ffff00",
-    "url": "https://juniorgouvea.framer.website"
+    "url": "https://juniorgouvea.framer.website/"
   },
   {
-    "icon": "🌐",
+    "icon": "book",
     "label": "TWB Website",
     "description": "Website voltado para exposição da empresa Teacher WIllians Batistela",
     "tag": "Website",
@@ -64,15 +72,15 @@
     "url": "https://twbteacherwillians.netlify.app/"
   },
   {
-    "icon": "🎈",
+    "icon": "photos",
     "label": "Mundo Ágape",
     "description": "Website voltado para exposição das fotos do ministério Mundo Ágape",
     "tag": "Web Data Base",
     "color": "#ff0097",
-    "url": "https://mundoagape.netlify.app"
+    "url": "https://mundoagape.netlify.app/"
   },
   {
-    "icon": "🎫",
+    "icon": "ticket",
     "label": "Calcular Passagens",
     "description": "Website voltado para cálculo de passagens de Ubatuba-São Sebastião",
     "tag": "Pessoal",
@@ -80,35 +88,35 @@
     "url": "  https://calcularpassagens.netlify.app/"
   },
   {
-    "icon": "🏗",
+    "icon": "scaffold",
     "label": "Loc Andaimes Website",
     "description": "Website voltado para exposição da empresa Loc Andaimes",
     "tag": "Website",
     "color": "#ff8800",
-    "url": "https://locandaimes.framer.website"
+    "url": "https://locandaimes.framer.website/"
   },
   {
-    "icon": "👽",
+    "icon": "terminal",
     "label": "O Hack",
     "description": "Site para entretenimento e geração de caracteres aleatórios",
     "tag": "Entertainment",
     "color": "#39ff14",
-    "url": "https://ohack.netlify.app"
+    "url": "https://ohack.netlify.app/"
   },
   {
-    "icon": "📷",
+    "icon": "camera",
     "label": "Relicário",
     "description": "Website voltado para exposição da empresa Relicário P2",
     "tag": "Website",
     "color": "#fff",
-    "url": "https://relicario.framer.website"
+    "url": "https://relicario.framer.website/"
   },
   {
-    "icon": "🪪",
+    "icon": "id",
     "label": "GoMei",
     "description": "Website voltado para exposição da empresa Gomei",
     "tag": "Website",
     "color": "#FF5500",
-    "url": "https://gomei.framer.website"
+    "url": "https://gomei.framer.website/"
   }
 ]

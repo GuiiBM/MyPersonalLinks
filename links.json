@@ -8,6 +8,14 @@
     "url": "https://gbm-mkt.netlify.app"
   },
   {
+    "icon": "🎧",
+    "label": "Ressonance",
+    "description": "Meu TCC",
+    "tag": "Pessoal",
+    "color": "#1046a9",
+    "url": "https://ressonance.hyperphp.com/"
+  },
+  {
     "icon": "📅",
     "label": "Estigmas",
     "description": "Calendário com sugestões de autoaprimoramento",

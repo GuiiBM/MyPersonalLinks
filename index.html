@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="light dark" />
+  <meta name="color-scheme" content="dark light" />
   <meta name="description" content="Projetos, sites e experimentos reunidos num só lugar." />
   <meta property="og:title" content="Meus Links" />
   <meta property="og:description" content="Projetos, sites e experimentos reunidos num só lugar." />
@@ -21,13 +21,14 @@
     } catch (e) {}
   </script>
   <style>
+    /* escuro por padrão; claro só quando o sistema (ou o botão) pede */
     :root {
-      --bg: #f3f0e8;
-      --fg: #1a1916;
-      --muted: #6f6a5f;
-      --line: #d9d3c4;
-      --hover: #ebe6da;
-      --grain: .05;
+      --bg: #141311;
+      --fg: #ece8df;
+      --muted: #8d887c;
+      --line: #2c2a26;
+      --hover: #1d1c19;
+      --grain: .07;
       --serif: 'Instrument Serif', Georgia, serif;
       --sans: 'Instrument Sans', system-ui, sans-serif;
       --mono: 'JetBrains Mono', ui-monospace, monospace;
@@ -35,24 +36,24 @@
       --spring: cubic-bezier(.34, 1.56, .64, 1);
     }
 
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
-        --bg: #141311;
-        --fg: #ece8df;
-        --muted: #8d887c;
-        --line: #2c2a26;
-        --hover: #1d1c19;
-        --grain: .07;
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        --bg: #f3f0e8;
+        --fg: #1a1916;
+        --muted: #6f6a5f;
+        --line: #d9d3c4;
+        --hover: #ebe6da;
+        --grain: .05;
       }
     }
 
-    :root[data-theme="dark"] {
-      --bg: #141311;
-      --fg: #ece8df;
-      --muted: #8d887c;
-      --line: #2c2a26;
-      --hover: #1d1c19;
-      --grain: .07;
+    :root[data-theme="light"] {
+      --bg: #f3f0e8;
+      --fg: #1a1916;
+      --muted: #6f6a5f;
+      --line: #d9d3c4;
+      --hover: #ebe6da;
+      --grain: .05;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -87,15 +88,18 @@
 
     /* ---------- tela de carregamento ---------- */
 
+    /* a tela de carregamento é sempre escura, seja qual for o tema */
     .loader {
+      --l-bg: #141311;
+      --l-fg: #ece8df;
       position: fixed;
       inset: 0;
       z-index: 100;
       display: grid;
       grid-template-rows: auto 1fr auto;
       padding: clamp(1rem, 4vw, 2.5rem);
-      background: var(--fg);
-      color: var(--bg);
+      background: var(--l-bg);
+      color: var(--l-fg);
       clip-path: inset(0 0 0 0);
       transition: clip-path 1s var(--expo);
     }
@@ -159,7 +163,7 @@
     .loader-bar {
       flex: 1;
       height: 1px;
-      background: color-mix(in srgb, var(--bg) 25%, transparent);
+      background: color-mix(in srgb, var(--l-fg) 25%, transparent);
       position: relative;
       overflow: hidden;
     }
@@ -167,7 +171,7 @@
     .loader-bar i {
       position: absolute;
       inset: 0;
-      background: var(--bg);
+      background: var(--l-fg);
       transform: scaleX(0);
       transform-origin: left;
     }
@@ -227,29 +231,7 @@
       text-transform: lowercase;
     }
 
-    .topbar .status { display: inline-flex; align-items: center; gap: .5rem; }
-
-    .topbar .status i {
-      width: .45rem;
-      height: .45rem;
-      border-radius: 50%;
-      background: #3fb950;
-      position: relative;
-    }
-
-    .topbar .status i::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background: #3fb950;
-      animation: pulse 2.4s ease-out infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: .6; }
-      70%, 100% { transform: scale(3); opacity: 0; }
-    }
+    .topbar .status { display: inline-flex; align-items: center; }
 
     .theme-btn {
       font: inherit;
@@ -695,7 +677,7 @@
 
   <main class="wrap">
     <div class="topbar fade" style="--base:200ms">
-      <span class="status"><i></i><span><span id="year"></span><span class="where"> · sempre construindo</span></span></span>
+      <span class="status"><span><span id="year"></span><span class="where"> · sempre construindo</span></span></span>
       <button type="button" class="theme-btn" id="themeBtn" aria-label="Alternar tema claro/escuro">
         <span class="dot" aria-hidden="true"></span><span id="themeLabel">tema</span>
       </button>
@@ -772,11 +754,13 @@
     /* ---------- tema ---------- */
 
     const root = document.documentElement;
+    const lightQuery = matchMedia('(prefers-color-scheme: light)');
     const isDark = () => root.dataset.theme
       ? root.dataset.theme === 'dark'
-      : matchMedia('(prefers-color-scheme: dark)').matches;
+      : !lightQuery.matches;
     const syncThemeLabel = () => { $('themeLabel').textContent = isDark() ? 'escuro' : 'claro'; };
     syncThemeLabel();
+    lightQuery.addEventListener('change', syncThemeLabel);
 
     $('themeBtn').addEventListener('click', e => {
       const next = isDark() ? 'light' : 'dark';

@@ -88,6 +88,14 @@
     "url": "  https://calcularpassagens.netlify.app/"
   },
   {
+    "icon": "bus",
+    "label": "5505 e 5506",
+    "description": "Horários ao vivo das linhas 5505 e 5506 entre São Sebastião, Caraguatatuba e Ubatuba",
+    "tag": "Pessoal",
+    "color": ["#f5a524", "#4cc9e0"],
+    "url": "https://5505e5506.netlify.app/"
+  },
+  {
     "icon": "scaffold",
     "label": "Loc Andaimes Website",
     "description": "Website voltado para exposição da empresa Loc Andaimes",

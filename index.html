@@ -808,21 +808,69 @@
 
     .vault-toggles { list-style: none; margin-top: .75rem; border-top: 1px solid var(--line); }
 
-    .vault-toggles label {
+    .vault-toggles li {
       display: grid;
-      grid-template-columns: .55rem 1fr auto 2.25rem;
+      grid-template-columns: 1.25rem .55rem 1fr auto auto 2.25rem;
       align-items: center;
-      gap: .75rem;
-      padding: .6rem .25rem;
+      gap: .6rem;
+      padding: .45rem .25rem;
       border-bottom: 1px solid var(--line);
-      cursor: pointer;
+      background: var(--bg);
+      position: relative;
       transition: background .2s;
     }
 
-    .vault-toggles label:hover { background: var(--hover); }
+    .vault-toggles li:hover { background: var(--hover); }
+
+    /* linha sendo arrastada */
+    .vault-toggles li.dragging {
+      z-index: 2;
+      background: var(--hover);
+      border-color: transparent;
+      box-shadow: 0 10px 30px rgb(0 0 0 / .35), 0 0 0 1px var(--fg);
+      transition: none;
+    }
+
+    /* alça de arrastar: seis pontos */
+    .vault-toggles .grip {
+      height: 1.6rem;
+      cursor: grab;
+      touch-action: none;
+      opacity: .5;
+      background: radial-gradient(circle, currentColor 1.1px, transparent 1.6px) center / 6px 6px;
+      background-size: 6px 6px;
+      mask: linear-gradient(#000 0 0) center / 12px 18px no-repeat;
+      -webkit-mask: linear-gradient(#000 0 0) center / 12px 18px no-repeat;
+      transition: opacity .2s;
+    }
+
+    .vault-toggles li:hover .grip { opacity: 1; }
+    .vault-toggles li.dragging .grip { cursor: grabbing; opacity: 1; }
 
     .vault-toggles .swatch { width: .55rem; height: .55rem; border-radius: 50%; background: var(--c); }
-    .vault-toggles .name { font-size: .9rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .vault-toggles .name { font-size: .9rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; }
+
+    .vault-toggles .moves { display: flex; }
+
+    .vault-toggles .mv {
+      width: 1.6rem;
+      height: 1.6rem;
+      display: grid;
+      place-items: center;
+      font-family: var(--mono);
+      font-size: .8rem;
+      color: var(--muted);
+      background: none;
+      border: 0;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: color .2s, background .2s;
+    }
+
+    .vault-toggles .mv:hover { color: var(--fg); background: var(--line); }
+    .vault-toggles .mv:focus-visible { outline: 2px solid var(--fg); outline-offset: -2px; }
+    .vault-toggles li:first-child .mv[data-dir="up"],
+    .vault-toggles li:last-child .mv[data-dir="down"] { opacity: .2; pointer-events: none; }
     .vault-toggles .tag { font-family: var(--mono); font-size: .65rem; color: var(--muted); text-transform: lowercase; white-space: nowrap; }
 
     /* chave liga/desliga */
@@ -855,7 +903,7 @@
 
     @media (max-width: 480px) {
       .vault-toggles .tag { display: none; }
-      .vault-toggles label { grid-template-columns: .55rem 1fr 2.25rem; }
+      .vault-toggles li { grid-template-columns: 1.25rem .55rem 1fr auto 2.25rem; gap: .5rem; }
     }
 
     /* troca de tema: círculo que se expande a partir do botão */
@@ -976,7 +1024,7 @@
         <ol class="vault-list" id="vaultList"></ol>
         <details class="vault-manage">
           <summary>gerenciar o que fica aqui dentro</summary>
-          <p class="vault-hint">Ligado: o projeto só aparece neste menu. Desligado: aparece na página para qualquer pessoa. Salva na hora; a lista acima se atualiza quando você reabrir o menu.</p>
+          <p class="vault-hint">Chave ligada: o projeto só aparece neste menu. Desligada: aparece na página para qualquer pessoa. Arraste pela alça ⠿ ou use as setas para mudar a ordem da página. Tudo salva na hora; a lista acima se atualiza quando você reabrir o menu.</p>
           <ul class="vault-toggles" id="vaultToggles"></ul>
           <p class="vault-msg" id="vaultStatus" aria-live="polite"></p>
         </details>
@@ -1324,15 +1372,21 @@
         : '<li class="vault-empty">nada aqui dentro por enquanto. Ligue algum projeto abaixo.</li>';
     };
 
+    const list = $('vaultToggles');
+    let savedOrder = [];   // ordem que está gravada no servidor
+
     const renderToggles = () => {
-      $('vaultToggles').innerHTML = all.map(({ id, label, tag, c, pessoal }) => `
-          <li>
-            <label style="--c:${esc(c)}">
-              <span class="swatch" aria-hidden="true"></span>
-              <span class="name">${esc(label)}</span>
-              <span class="tag">${esc(tag || '')}</span>
-              <input type="checkbox" role="switch" data-id="${esc(id)}" ${pessoal ? 'checked' : ''} aria-label="Esconder ${esc(label)} da página" />
-            </label>
+      list.innerHTML = all.map(({ id, label, tag, c, pessoal }, i) => `
+          <li data-id="${esc(id)}" style="--c:${esc(c)}">
+            <span class="grip" aria-hidden="true" title="arrastar"></span>
+            <span class="swatch" aria-hidden="true"></span>
+            <label class="name" for="vt${i}">${esc(label)}</label>
+            <span class="tag">${esc(tag || '')}</span>
+            <span class="moves">
+              <button type="button" class="mv" data-dir="up" aria-label="Subir ${esc(label)}">↑</button>
+              <button type="button" class="mv" data-dir="down" aria-label="Descer ${esc(label)}">↓</button>
+            </span>
+            <input id="vt${i}" type="checkbox" role="switch" data-id="${esc(id)}" ${pessoal ? 'checked' : ''} aria-label="Esconder ${esc(label)} da página" />
           </li>`).join('');
     };
 
@@ -1378,6 +1432,7 @@
         if (!r.ok) throw new Error(r.status);
         secret = tryPass;
         all = (await r.json()).map(prep);
+        savedOrder = all.map(l => l.id);
         showOpen();
       } catch (err) {
         say(msg, 'esta área só funciona no site publicado na Netlify.', true);
@@ -1386,29 +1441,153 @@
       }
     });
 
-    // cada chave salva na hora, uma gravação de cada vez
-    $('vaultToggles').addEventListener('change', e => {
+    const domOrder = () => [...list.children].map(li => li.dataset.id);
+    const byOrder = (rows, ids) => {
+      const pos = new Map(ids.map((id, i) => [id, i]));
+      return [...rows].sort((a, b) => (pos.has(a.id) ? pos.get(a.id) : 1e9) - (pos.has(b.id) ? pos.get(b.id) : 1e9));
+    };
+    const reorderDom = ids => {
+      const byId = new Map([...list.children].map(li => [li.dataset.id, li]));
+      ids.forEach(id => byId.has(id) && list.appendChild(byId.get(id)));
+    };
+
+    // resposta do servidor; enquanto o painel está aberto, a ordem da tela manda
+    const adopt = data => {
+      const rows = data.map(prep);
+      savedOrder = rows.map(l => l.id);
+      all = list.children.length ? byOrder(rows, domOrder()) : rows;
+      renderMain(all.filter(l => !l.pessoal), true);
+    };
+
+    // uma gravação de cada vez
+    const persist = (payload, undo) => {
+      say(vStatus, 'salvando…');
+      saving = saving.then(async () => {
+        try {
+          const r = await api({ password: secret, ...payload });
+          if (!r.ok) throw new Error(r.status);
+          adopt(await r.json());
+          say(vStatus, 'salvo. Já vale para quem abrir a página.');
+        } catch (err) {
+          undo();
+          say(vStatus, 'não foi possível salvar. Tente de novo.', true);
+        }
+      });
+    };
+
+    // chave: esconde ou mostra na página
+    list.addEventListener('change', e => {
       const box = e.target.closest('input[data-id]');
       if (!box) return;
       const id = box.dataset.id;
       all.find(l => l.id === id).pessoal = box.checked;
-      say(vStatus, 'salvando…');
       const snapshot = Object.fromEntries(all.map(l => [l.id, l.pessoal]));
-      saving = saving.then(async () => {
-        try {
-          const r = await api({ password: secret, pessoal: snapshot });
-          if (!r.ok) throw new Error(r.status);
-          all = (await r.json()).map(prep);
-          renderMain(all.filter(l => !l.pessoal), true);
-          say(vStatus, 'salvo. Já vale para quem abrir a página.');
-        } catch (err) {
-          const row = all.find(l => l.id === id);
-          row.pessoal = !snapshot[id];
-          box.checked = row.pessoal;
-          say(vStatus, 'não foi possível salvar. Tente de novo.', true);
-        }
+      persist({ pessoal: snapshot }, () => {
+        const row = all.find(l => l.id === id);
+        row.pessoal = !snapshot[id];
+        box.checked = row.pessoal;
       });
     });
+
+    // ordem: espera parar de mexer um instante e grava
+    let orderTimer = 0;
+    const commitOrder = () => {
+      all = byOrder(all, domOrder());
+      say(vStatus, 'salvando…');
+      clearTimeout(orderTimer);
+      orderTimer = setTimeout(() => {
+        persist({ order: domOrder() }, () => {
+          reorderDom(savedOrder);
+          all = byOrder(all, savedOrder);
+        });
+      }, 450);
+    };
+
+    // anima a troca de lugar (FLIP); quem está deslizando não recebe clique,
+    // para um segundo clique rápido acertar a linha certa
+    const flip = (els, change) => {
+      const before = els.map(el => el.offsetTop);
+      change();
+      if (reduced) return;
+      els.forEach((el, i) => {
+        const d = before[i] - el.offsetTop;
+        if (!d) return;
+        el.style.pointerEvents = 'none';
+        el.animate([{ transform: `translateY(${d}px)` }, { transform: 'none' }], { duration: 260, easing: 'cubic-bezier(.16,1,.3,1)' })
+          .finished.finally(() => { el.style.pointerEvents = ''; });
+      });
+    };
+
+    const flash = li => {
+      if (reduced) return;
+      li.animate([{ background: 'color-mix(in srgb, var(--c) 22%, var(--bg))' }, { background: 'var(--bg)' }], { duration: 700, easing: 'ease-out' });
+    };
+
+    // setas ↑ ↓
+    list.addEventListener('click', e => {
+      const b = e.target.closest('.mv');
+      if (!b) return;
+      const li = b.closest('li');
+      const up = b.dataset.dir === 'up';
+      const other = up ? li.previousElementSibling : li.nextElementSibling;
+      if (!other) return;
+      // a linha escolhida vai direto para o lugar novo; só a vizinha desliza
+      flip([other], () => up ? list.insertBefore(li, other) : list.insertBefore(other, li));
+      flash(li);
+      b.focus();
+      commitOrder();
+    });
+
+    // arrastar pela alça (mouse e toque)
+    let drag = null;
+    const dragOffset = e => e.clientY - drag.y + (vault.scrollTop - drag.scroll);
+
+    list.addEventListener('pointerdown', e => {
+      const grip = e.target.closest('.grip');
+      if (!grip || e.button > 0) return;
+      e.preventDefault();
+      grip.setPointerCapture(e.pointerId);
+      drag = { li: grip.closest('li'), y: e.clientY, scroll: vault.scrollTop, moved: false };
+      drag.li.classList.add('dragging');
+    });
+
+    list.addEventListener('pointermove', e => {
+      if (!drag) return;
+      const { li } = drag;
+      // rola a caixa quando chega perto da borda
+      const box = vault.getBoundingClientRect();
+      if (e.clientY < box.top + 48) vault.scrollTop -= 10;
+      else if (e.clientY > box.bottom - 48) vault.scrollTop += 10;
+
+      // troca quantas vezes for preciso (um gesto rápido pode pular várias linhas)
+      for (;;) {
+        const mid = li.offsetTop + dragOffset(e) + li.offsetHeight / 2;
+        const next = li.nextElementSibling;
+        const prev = li.previousElementSibling;
+        if (next && mid > next.offsetTop + next.offsetHeight / 2) {
+          flip([next], () => list.insertBefore(next, li));
+          drag.y += next.offsetHeight;
+        } else if (prev && mid < prev.offsetTop + prev.offsetHeight / 2) {
+          flip([prev], () => list.insertBefore(li, prev));
+          drag.y -= prev.offsetHeight;
+        } else break;
+        drag.moved = true;
+      }
+      li.style.transform = `translateY(${dragOffset(e)}px)`;
+    });
+
+    const endDrag = e => {
+      if (!drag) return;
+      const { li, moved } = drag;
+      const d = dragOffset(e);
+      drag = null;
+      li.classList.remove('dragging');
+      li.style.transform = '';
+      if (!reduced && d) li.animate([{ transform: `translateY(${d}px)` }, { transform: 'none' }], { duration: 220, easing: 'cubic-bezier(.16,1,.3,1)' });
+      if (moved) commitOrder();
+    };
+    list.addEventListener('pointerup', endDrag);
+    list.addEventListener('pointercancel', endDrag);
   </script>
 </body>
 </html>

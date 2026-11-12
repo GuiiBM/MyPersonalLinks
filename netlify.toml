@@ -1,2 +1,24 @@
 [build]
   publish = "."
+
+[functions]
+  node_bundler = "esbuild"
+
+# o código do servidor e os arquivos do npm não precisam ser públicos
+[[redirects]]
+  from = "/netlify/*"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package.json"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package-lock.json"
+  to = "/404"
+  status = 404
+  force = true

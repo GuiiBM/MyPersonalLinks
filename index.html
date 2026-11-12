@@ -604,6 +604,260 @@
     .to-top:hover { color: var(--fg); }
     .to-top:hover span { transform: translateY(-3px); }
 
+    /* ---------- área pessoal ---------- */
+
+    /* botão quase invisível no rodapé */
+    .vault-btn {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      margin: -.4rem -.4rem -.4rem .1rem;
+      display: inline-grid;
+      place-items: center;
+      vertical-align: middle;
+      cursor: pointer;
+      opacity: .35;
+      transition: opacity .3s;
+    }
+
+    .vault-btn::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .vault-btn:hover, .vault-btn:focus-visible { opacity: 1; }
+    .vault-btn:focus-visible { outline: 1px solid var(--fg); outline-offset: 0; border-radius: 50%; }
+
+    .vault {
+      margin: auto;
+      width: min(38rem, calc(100% - 2rem));
+      max-height: min(46rem, calc(100% - 2rem));
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--bg);
+      color: var(--fg);
+      box-shadow: 0 30px 80px rgb(0 0 0 / .45);
+      overscroll-behavior: contain;
+    }
+
+    .vault::backdrop { background: rgb(10 10 9 / .6); backdrop-filter: blur(3px); }
+    .vault[open] { animation: vault-in .55s var(--expo); }
+
+    @keyframes vault-in { from { opacity: 0; transform: translateY(1rem) scale(.98); } }
+
+    .vault-inner { padding: clamp(1.25rem, 4vw, 2rem); }
+
+    .vault-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--fg);
+    }
+
+    .vault h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(2.25rem, 8vw, 3rem);
+      line-height: .9;
+      letter-spacing: -.02em;
+    }
+
+    .vault h2 em { font-style: italic; color: var(--muted); }
+
+    .vault-close {
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--muted);
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      padding: .35rem .8rem;
+      cursor: pointer;
+      transition: color .2s, border-color .2s;
+    }
+
+    .vault-close:hover { color: var(--fg); border-color: var(--fg); }
+
+    .vault-lock { padding-top: 1.5rem; }
+
+    .vault label.kicker {
+      display: block;
+      font-family: var(--mono);
+      font-size: .7rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-transform: lowercase;
+    }
+
+    .vault-field {
+      display: flex;
+      gap: .75rem;
+      margin-top: .5rem;
+      border-bottom: 1px solid var(--line);
+      transition: border-color .2s;
+    }
+
+    .vault-field:focus-within { border-color: var(--fg); }
+
+    .vault-field input {
+      flex: 1;
+      min-width: 0;
+      font: inherit;
+      font-family: var(--serif);
+      font-size: 1.75rem;
+      color: inherit;
+      background: none;
+      border: 0;
+      padding: .25rem 0 .4rem;
+      outline: none;
+    }
+
+    .vault-field button {
+      font-family: var(--mono);
+      font-size: .75rem;
+      color: var(--fg);
+      background: none;
+      border: 0;
+      padding: 0 .25rem;
+      cursor: pointer;
+    }
+
+    .vault-field button:disabled { opacity: .4; cursor: wait; }
+
+    .vault-msg {
+      min-height: 1.5em;
+      margin-top: .6rem;
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--muted);
+    }
+
+    .vault-msg.bad { color: #e5484d; }
+
+    .vault-list { list-style: none; }
+
+    .vault-list a {
+      --c: var(--fg);
+      display: grid;
+      grid-template-columns: 2.5rem 1fr 1rem;
+      grid-template-areas: "icon text arrow";
+      align-items: center;
+      gap: 1rem;
+      padding: .9rem .25rem;
+      border-bottom: 1px solid var(--line);
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .vault-list .icon { width: 2.5rem; height: 2.5rem; align-self: center; }
+    .vault-list .icon svg { width: 1.5rem; height: 1.5rem; }
+    .vault-list .title { font-size: 1.4rem; }
+    .vault-list .desc { margin-top: .15rem; font-size: .8rem; }
+
+    .vault-list a:focus-visible { outline: 2px solid var(--fg); outline-offset: -2px; }
+
+    @media (hover: hover) {
+      .vault-list a:hover .icon { background: var(--c); border-color: var(--c); color: var(--on); transform: rotate(-6deg) scale(1.06); }
+      .vault-list a:hover .title { transform: translateX(.35rem); }
+      .vault-list a:hover .arrow { color: var(--fg); }
+    }
+
+    .vault-empty {
+      padding: 1.25rem .25rem;
+      font-family: var(--mono);
+      font-size: .75rem;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .vault-manage { margin-top: 1.5rem; }
+
+    .vault-manage summary {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--muted);
+      text-transform: lowercase;
+      cursor: pointer;
+      list-style: none;
+      transition: color .2s;
+    }
+
+    .vault-manage summary::-webkit-details-marker { display: none; }
+    .vault-manage summary::before { content: '+'; display: inline-block; transition: transform .35s var(--spring); }
+    .vault-manage[open] summary::before { transform: rotate(45deg); }
+    .vault-manage summary:hover, .vault-manage[open] summary { color: var(--fg); }
+    .vault-manage summary:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+
+    .vault-hint {
+      margin-top: .35rem;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .vault-toggles { list-style: none; margin-top: .75rem; border-top: 1px solid var(--line); }
+
+    .vault-toggles label {
+      display: grid;
+      grid-template-columns: .55rem 1fr auto 2.25rem;
+      align-items: center;
+      gap: .75rem;
+      padding: .6rem .25rem;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .vault-toggles label:hover { background: var(--hover); }
+
+    .vault-toggles .swatch { width: .55rem; height: .55rem; border-radius: 50%; background: var(--c); }
+    .vault-toggles .name { font-size: .9rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .vault-toggles .tag { font-family: var(--mono); font-size: .65rem; color: var(--muted); text-transform: lowercase; white-space: nowrap; }
+
+    /* chave liga/desliga */
+    .vault-toggles input {
+      appearance: none;
+      width: 2.25rem;
+      height: 1.25rem;
+      border-radius: 99px;
+      border: 1px solid var(--line);
+      background: var(--hover);
+      position: relative;
+      cursor: pointer;
+      transition: background .25s, border-color .25s;
+    }
+
+    .vault-toggles input::before {
+      content: '';
+      position: absolute;
+      top: 2px; left: 2px;
+      width: calc(1.25rem - 6px);
+      height: calc(1.25rem - 6px);
+      border-radius: 50%;
+      background: var(--muted);
+      transition: transform .35s var(--spring), background .25s;
+    }
+
+    .vault-toggles input:checked { background: var(--fg); border-color: var(--fg); }
+    .vault-toggles input:checked::before { transform: translateX(1rem); background: var(--bg); }
+    .vault-toggles input:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+
+    @media (max-width: 480px) {
+      .vault-toggles .tag { display: none; }
+      .vault-toggles label { grid-template-columns: .55rem 1fr 2.25rem; }
+    }
+
     /* troca de tema: círculo que se expande a partir do botão */
     ::view-transition-old(root),
     ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
@@ -698,9 +952,37 @@
     <footer class="fade" style="--base:700ms">
       <span id="count" aria-live="polite"></span>
       <button type="button" class="to-top" id="toTop">voltar ao topo <span aria-hidden="true">↑</span></button>
-      <span>clique para abrir em nova aba ↗</span>
+      <span>clique para abrir em nova aba ↗<button type="button" class="vault-btn" id="vaultBtn" aria-label="Área reservada" aria-haspopup="dialog"></button></span>
     </footer>
   </main>
+
+  <dialog class="vault" id="vault" aria-labelledby="vaultTitle">
+    <div class="vault-inner">
+      <div class="vault-head">
+        <h2 id="vaultTitle">Área <em>reservada</em></h2>
+        <button type="button" class="vault-close" id="vaultClose">fechar</button>
+      </div>
+
+      <form class="vault-lock" id="vaultLock">
+        <label class="kicker" for="vaultPass">senha</label>
+        <div class="vault-field">
+          <input id="vaultPass" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" required />
+          <button type="submit" id="vaultGo">entrar →</button>
+        </div>
+        <p class="vault-msg" id="vaultMsg" role="alert"></p>
+      </form>
+
+      <div id="vaultOpen" hidden>
+        <ol class="vault-list" id="vaultList"></ol>
+        <details class="vault-manage">
+          <summary>gerenciar o que fica aqui dentro</summary>
+          <p class="vault-hint">Ligado: o projeto só aparece neste menu. Desligado: aparece na página para qualquer pessoa. Salva na hora; a lista acima se atualiza quando você reabrir o menu.</p>
+          <ul class="vault-toggles" id="vaultToggles"></ul>
+          <p class="vault-msg" id="vaultStatus" aria-live="polite"></p>
+        </details>
+      </div>
+    </div>
+  </dialog>
 
   <div class="cursor" id="cursor" aria-hidden="true"><div class="cursor-inner"><span id="cursorText">abrir</span> ↗</div></div>
 
@@ -743,7 +1025,12 @@
       terminal:  '<rect x="3.5" y="4.5" width="17" height="15" rx="1"/><path d="M7.5 9.5l3 2.5-3 2.5M13 15h4"/>',
       camera:    '<path d="M4.5 8H7l1.5-2.5h7L17 8h2.5a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.3" r="3.3"/>',
       face:      '<rect x="5.5" y="3.5" width="13" height="17" rx="1"/><circle cx="12" cy="10" r="2.4"/><path d="M8.3 16.5c.7-1.8 2.1-2.7 3.7-2.7s3 .9 3.7 2.7"/>',
-      id:        '<rect x="3.5" y="5" width="17" height="14" rx="1"/><circle cx="8.5" cy="10.5" r="1.9"/><path d="M5.8 15.5c.5-1.4 1.5-2.1 2.7-2.1s2.2.7 2.7 2.1M14 10h3.5M14 13.5h2.5"/>'
+      id:        '<rect x="3.5" y="5" width="17" height="14" rx="1"/><circle cx="8.5" cy="10.5" r="1.9"/><path d="M5.8 15.5c.5-1.4 1.5-2.1 2.7-2.1s2.2.7 2.7 2.1M14 10h3.5M14 13.5h2.5"/>',
+      house:     '<path d="M3.5 11L12 4l8.5 7"/><path d="M6 9v10.5h12V9"/><path d="M10 19.5v-5h4v5"/>',
+      alien:     '<path d="M12 3.5c-4.4 0-7.5 3.1-7.5 7.2 0 4.7 4 9.8 7.5 9.8s7.5-5.1 7.5-9.8c0-4.1-3.1-7.2-7.5-7.2z"/><path d="M7.3 11.2c1.8-.3 3.3.7 3.6 2.4-1.8.3-3.3-.7-3.6-2.4zM16.7 11.2c-1.8-.3-3.3.7-3.6 2.4 1.8.3 3.3-.7 3.6-2.4zM10.5 17.3h3"/>',
+      cards:     '<rect x="8.5" y="3.5" width="11" height="15" rx="1"/><path d="M8.5 6.6l-3.1.8a1 1 0 0 0-.7 1.2l2.9 11a1 1 0 0 0 1.2.7l6.2-1.6"/><path d="M14 7.5l2 3.5-2 3.5-2-3.5z"/>',
+      dice:      '<rect x="4" y="4" width="16" height="16" rx="2.5"/><circle cx="8.5" cy="8.5" r=".9"/><circle cx="15.5" cy="8.5" r=".9"/><circle cx="12" cy="12" r=".9"/><circle cx="8.5" cy="15.5" r=".9"/><circle cx="15.5" cy="15.5" r=".9"/>',
+      code:      '<path d="M8.5 7.5L4 12l4.5 4.5M15.5 7.5L20 12l-4.5 4.5M13.5 5l-3 14"/>'
     };
 
     const iconFor = (name, label) => ICONS[name]
@@ -935,50 +1222,56 @@
 
     /* ---------- dados ---------- */
 
-    fetch('links.json')
-      .then(r => r.json())
-      .then(links => {
-        const rows = links.map(l => {
-          const url = l.url.trim();
-          const colors = Array.isArray(l.color) ? l.color : [l.color || '#888888'];
-          const c = colors.length > 1 ? blendColors(colors) : colors[0];
-          const on = onColor(c.startsWith('#') ? hexToRgb(c) : c.match(/\d+/g).map(Number));
-          const domain = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
-          return { ...l, url, c, on, domain };
-        });
+    const prep = l => {
+      const url = l.url.trim();
+      const colors = Array.isArray(l.color) ? l.color : [l.color || '#888888'];
+      const c = colors.length > 1 ? blendColors(colors) : colors[0];
+      const on = onColor(c.startsWith('#') ? hexToRgb(c) : c.match(/\d+/g).map(Number));
+      const domain = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+      return { ...l, url, c, on, domain, id: l.id || domain, pessoal: l.pessoal === true };
+    };
 
+    const renderMain = (rows, animate) => {
+      app.innerHTML = rows.map(({ icon, label, description, tag, url, c, on, domain }, i) => `
+          <li class="item" data-tag="${esc(tag || '')}">
+            <a href="${esc(url)}" target="_blank" rel="noopener" data-domain="${esc(domain.split('/')[0])}" style="--c:${esc(c)};--on:${on}">
+              <span class="num">${pad(i + 1)}</span>
+              <span class="icon">${iconFor(icon, label)}</span>
+              <span class="text">
+                <span class="title">${esc(label)}</span>
+                ${description ? `<span class="desc">${esc(description)}</span>` : ''}
+              </span>
+              <span class="meta">
+                ${tag ? `<span>${esc(tag)}</span>` : ''}
+                <span class="domain">${esc(domain)}</span>
+              </span>
+              <span class="arrow" aria-hidden="true"><span>↗</span><span>↗</span></span>
+            </a>
+          </li>`).join('');
+
+      // filtros por categoria
+      const counts = rows.reduce((acc, l) => {
+        if (l.tag) acc[l.tag] = (acc[l.tag] || 0) + 1;
+        return acc;
+      }, {});
+      const tags = ['Todos', ...Object.keys(counts)];
+      if (!tags.includes(current)) current = 'Todos';
+      filters.innerHTML = tags.map(t =>
+        `<button type="button" data-tag="${esc(t)}" aria-pressed="${t === current}">${esc(t)}<sup>${t === 'Todos' ? rows.length : counts[t]}</sup></button>`
+      ).join('');
+      filters.appendChild(ind);
+
+      apply(current, animate);
+    };
+
+    // no site publicado, /links.json já vem sem os pessoais; localmente o filtro é aqui
+    fetch('links.json', { cache: 'no-store' })
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(links => {
+        const rows = links.map(prep).filter(l => !l.pessoal);
         names = rows;
         $('loaderTotal').textContent = `${pad(rows.length)} projetos`;
-
-        app.innerHTML = rows.map(({ icon, label, description, tag, url, c, on, domain }, i) => `
-            <li class="item" data-tag="${esc(tag || '')}">
-              <a href="${esc(url)}" target="_blank" rel="noopener" data-domain="${esc(domain.split('/')[0])}" style="--c:${esc(c)};--on:${on}">
-                <span class="num">${pad(i + 1)}</span>
-                <span class="icon">${iconFor(icon, label)}</span>
-                <span class="text">
-                  <span class="title">${esc(label)}</span>
-                  ${description ? `<span class="desc">${esc(description)}</span>` : ''}
-                </span>
-                <span class="meta">
-                  ${tag ? `<span>${esc(tag)}</span>` : ''}
-                  <span class="domain">${esc(domain)}</span>
-                </span>
-                <span class="arrow" aria-hidden="true"><span>↗</span><span>↗</span></span>
-              </a>
-            </li>`).join('');
-
-        // filtros por categoria
-        const counts = rows.reduce((acc, l) => {
-          if (l.tag) acc[l.tag] = (acc[l.tag] || 0) + 1;
-          return acc;
-        }, {});
-        const tags = ['Todos', ...Object.keys(counts)];
-        filters.innerHTML = tags.map((t, i) =>
-          `<button type="button" data-tag="${esc(t)}" aria-pressed="${i === 0}">${esc(t)}<sup>${i === 0 ? rows.length : counts[t]}</sup></button>`
-        ).join('');
-        filters.appendChild(ind);
-
-        apply('Todos', false);
+        renderMain(rows, false);
       })
       .catch(() => {
         app.innerHTML = '<li class="empty">não foi possível carregar os links agora — tente recarregar a página.</li>';
@@ -994,6 +1287,127 @@
         if (!io || reduced) return items.forEach(li => li.classList.add('in'));
         items.forEach(li => io.observe(li));
       }, reduced ? 0 : 450);
+    });
+
+    /* ---------- área pessoal ---------- */
+
+    const vault = $('vault');
+    const pass = $('vaultPass');
+    const msg = $('vaultMsg');
+    const vStatus = $('vaultStatus');
+    let secret = null;   // senha aceita nesta visita
+    let all = [];        // todos os projetos, com `pessoal`
+    let saving = Promise.resolve();
+
+    const api = body => fetch('/api/links', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+
+    const say = (el, text, bad) => { el.textContent = text; el.classList.toggle('bad', !!bad); };
+
+    const renderVaultList = () => {
+      const mine = all.filter(l => l.pessoal);
+      $('vaultList').innerHTML = mine.length
+        ? mine.map(({ icon, label, description, url, c, on }) => `
+            <li>
+              <a href="${esc(url)}" target="_blank" rel="noopener" style="--c:${esc(c)};--on:${on}">
+                <span class="icon">${iconFor(icon, label)}</span>
+                <span class="text">
+                  <span class="title">${esc(label)}</span>
+                  ${description ? `<span class="desc">${esc(description)}</span>` : ''}
+                </span>
+                <span class="arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>`).join('')
+        : '<li class="vault-empty">nada aqui dentro por enquanto. Ligue algum projeto abaixo.</li>';
+    };
+
+    const renderToggles = () => {
+      $('vaultToggles').innerHTML = all.map(({ id, label, tag, c, pessoal }) => `
+          <li>
+            <label style="--c:${esc(c)}">
+              <span class="swatch" aria-hidden="true"></span>
+              <span class="name">${esc(label)}</span>
+              <span class="tag">${esc(tag || '')}</span>
+              <input type="checkbox" role="switch" data-id="${esc(id)}" ${pessoal ? 'checked' : ''} aria-label="Esconder ${esc(label)} da página" />
+            </label>
+          </li>`).join('');
+    };
+
+    const showOpen = () => {
+      $('vaultTitle').innerHTML = 'Pessoal';
+      $('vaultLock').hidden = true;
+      $('vaultOpen').hidden = false;
+      renderVaultList();
+      renderToggles();
+      vault.querySelector('.vault-manage').open = false;
+      say(vStatus, '');
+    };
+
+    $('vaultBtn').addEventListener('click', () => {
+      cursor.classList.remove('on');
+      vault.showModal();
+      if (secret) return showOpen();
+      pass.value = '';
+      say(msg, '');
+      pass.focus();
+    });
+
+    $('vaultClose').addEventListener('click', () => vault.close());
+    // clique fora da caixa fecha
+    vault.addEventListener('click', e => { if (e.target === vault) vault.close(); });
+
+    $('vaultLock').addEventListener('submit', async e => {
+      e.preventDefault();
+      const tryPass = pass.value;
+      $('vaultGo').disabled = true;
+      say(msg, 'conferindo…');
+      try {
+        const r = await api({ password: tryPass });
+        if (r.status === 401) {
+          say(msg, 'senha incorreta', true);
+          if (!reduced) pass.parentElement.animate(
+            [{ transform: 'translateX(0)' }, { transform: 'translateX(-6px)' }, { transform: 'translateX(6px)' }, { transform: 'translateX(-3px)' }, { transform: 'translateX(0)' }],
+            { duration: 320 }
+          );
+          pass.select();
+          return;
+        }
+        if (!r.ok) throw new Error(r.status);
+        secret = tryPass;
+        all = (await r.json()).map(prep);
+        showOpen();
+      } catch (err) {
+        say(msg, 'esta área só funciona no site publicado na Netlify.', true);
+      } finally {
+        $('vaultGo').disabled = false;
+      }
+    });
+
+    // cada chave salva na hora, uma gravação de cada vez
+    $('vaultToggles').addEventListener('change', e => {
+      const box = e.target.closest('input[data-id]');
+      if (!box) return;
+      const id = box.dataset.id;
+      all.find(l => l.id === id).pessoal = box.checked;
+      say(vStatus, 'salvando…');
+      const snapshot = Object.fromEntries(all.map(l => [l.id, l.pessoal]));
+      saving = saving.then(async () => {
+        try {
+          const r = await api({ password: secret, pessoal: snapshot });
+          if (!r.ok) throw new Error(r.status);
+          all = (await r.json()).map(prep);
+          renderMain(all.filter(l => !l.pessoal), true);
+          say(vStatus, 'salvo. Já vale para quem abrir a página.');
+        } catch (err) {
+          const row = all.find(l => l.id === id);
+          row.pessoal = !snapshot[id];
+          box.checked = row.pessoal;
+          say(vStatus, 'não foi possível salvar. Tente de novo.', true);
+        }
+      });
     });
   </script>
 </body>

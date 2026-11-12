@@ -16,12 +16,51 @@
     "url": "https://ressonance.hyperphp.com/"
   },
   {
+    "icon": "house",
+    "label": "Luiz Cesar Imóveis",
+    "description": "Website do corretor de imóveis Luiz Cesar, na Praia da Enseada em Ubatuba, com painel para gerenciar os imóveis",
+    "tag": "Website",
+    "color": [
+      "#17414d",
+      "#b4632c"
+    ],
+    "url": "https://corretorluizcesar.com.br/"
+  },
+  {
     "icon": "face",
     "label": "Cara a Cara",
     "description": "Jogo Cara a Cara Online",
     "tag": "Entertainment",
     "color": "#b18b33",
-    "url": "https://jogarcaraacara.netlify.app/"
+    "url": "https://jogarcaraacara.netlify.app/",
+    "pessoal": true
+  },
+  {
+    "icon": "face",
+    "label": "Rosto a Rosto",
+    "description": "Jogo de dedução online feito para a Litoral Game Jam: contra o bot, no mesmo celular ou online",
+    "tag": "Entertainment",
+    "color": "#f2b705",
+    "url": "https://rostoarosto.netlify.app/",
+    "pessoal": true
+  },
+  {
+    "icon": "alien",
+    "label": "Alienzinho",
+    "description": "Bichinho virtual filosófico em 3D: cuide de um alien caído na Terra por uma vida inteira",
+    "tag": "Entertainment",
+    "color": "#7ee081",
+    "url": "https://meualien.netlify.app/",
+    "pessoal": true
+  },
+  {
+    "icon": "cards",
+    "label": "Arkards",
+    "description": "Jogo de cartas em desenvolvimento",
+    "tag": "Entertainment",
+    "color": "#ca8a04",
+    "url": "https://projetoarkards.netlify.app/",
+    "pessoal": true
   },
   {
     "icon": "calendar",
@@ -44,8 +83,22 @@
     "label": "Non-Sense Maker 'Não'",
     "description": "Um gerador automático de frases que compõe e dizem 'Não'",
     "tag": "Entertainment",
-    "color": ["#ff0214", "#f45167"],
+    "color": [
+      "#ff0214",
+      "#f45167"
+    ],
     "url": "https://negativeanswer.netlify.app/"
+  },
+  {
+    "icon": "dice",
+    "label": "Benzabets",
+    "description": "Evento cassino da República Benzadeus (USP Ribeirão Preto), com odds de zoeira sobre os moradores",
+    "tag": "Entertainment",
+    "color": [
+      "#2f6fbf",
+      "#d6a548"
+    ],
+    "url": "https://repbenzadeus.netlify.app/"
   },
   {
     "icon": "swap",
@@ -80,19 +133,30 @@
     "url": "https://mundoagape.netlify.app/"
   },
   {
+    "icon": "code",
+    "label": "Introdução à C",
+    "description": "Links da turma de Introdução à Linguagem C do 2º semestre, com o professor Luciano Carvalho",
+    "tag": "Web Data Base",
+    "color": "#cfc8b8",
+    "url": "https://intro-to-c-class-2nd-sem.netlify.app/"
+  },
+  {
     "icon": "ticket",
     "label": "Calcular Passagens",
     "description": "Website voltado para cálculo de passagens de Ubatuba-São Sebastião",
     "tag": "Pessoal",
     "color": "#00aa97",
-    "url": "  https://calcularpassagens.netlify.app/"
+    "url": "https://calcularpassagens.netlify.app/"
   },
   {
     "icon": "bus",
     "label": "5505 e 5506",
     "description": "Horários ao vivo das linhas 5505 e 5506 entre São Sebastião, Caraguatatuba e Ubatuba",
     "tag": "Pessoal",
-    "color": ["#f5a524", "#4cc9e0"],
+    "color": [
+      "#f5a524",
+      "#4cc9e0"
+    ],
     "url": "https://5505e5506.netlify.app/"
   },
   {
